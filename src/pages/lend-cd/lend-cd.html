@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons>
+      <button ion-button clear (click)="dismissModal()">Fermer</button>
+    </ion-buttons>
+    <ion-title>LendCDPage</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <button ion-item [color]="cd.estprete ? 'secondary':'danger'">
+      {{cd.titre}} : {{cd.chanteur}}
+    </button>
+  </ion-list> <form [formGroup]="Form">
+    <ion-item>
+      <input *ngIf="cd.estprete" type="text" formControlName="nomPersonne">
+
+    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+
+          <button ion-button type="button" full color="secondary" [disabled]="cd.estprete" (click)="Onrendrecd()">rendre</button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button ion-button type="button" full color="danger" [disabled]="!cd.estprete" (click)="OnToggleCD()">preter</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  <ion-item *ngIf="!cd.estprete">
+    Nom de la personne qui a emprunté: {{cd.nomPersonne}}
+  </ion-item>
+</ion-content>

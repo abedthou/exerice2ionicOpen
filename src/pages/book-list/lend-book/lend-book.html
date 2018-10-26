@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>LendBookPage</ion-title>
+    <ion-buttons end>
+      <button ion-button icon only (click)="dismissModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <button ion-item [color]="livre.estprete ? 'secondary':'danger'">
+      {{livre.titre}} : {{livre.auteur}}
+    </button>
+  </ion-list>
+  <form [formGroup]="Form">
+    <ion-item>
+      <input *ngIf="livre.estprete" type="text" formControlName="nomPersonne">
+
+    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+
+          <button ion-button type="button" full color="secondary" [disabled]="livre.estprete" (click)="OnrendreBook()">rendre</button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button ion-button type="button" full color="danger" [disabled]="!livre.estprete" (click)="OnToggleBook()">preter</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  <ion-item *ngIf="!livre.estprete">
+    Nom de la personne qui a emprunté: {{livre.nomPersonne}}
+  </ion-item>
+</ion-content>
